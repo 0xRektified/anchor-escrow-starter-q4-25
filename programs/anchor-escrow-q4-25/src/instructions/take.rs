@@ -51,6 +51,7 @@ pub struct Take<'info> {
     #[account(
         mut,
         close = maker,
+        has_one = maker,
     )]
     pub escrow: Account<'info, Escrow>,
 
@@ -102,7 +103,7 @@ impl<'info> Take<'info> {
         // WITHDRAW
         let signer_seeds: &[&[&[u8]]] = &[&[
             b"escrow",
-            self.maker.to_account_info().key.as_ref(),
+            self.escrow.maker.as_ref(),
             &self.escrow.seed.to_le_bytes(),
             &[self.escrow.bump],
         ]];
