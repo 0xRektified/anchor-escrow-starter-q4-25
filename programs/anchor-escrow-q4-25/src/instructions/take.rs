@@ -52,8 +52,10 @@ pub struct Take<'info> {
         mut,
         close = maker,
         has_one = maker,
+        has_one = mint_a,
+        has_one = mint_b,
     )]
-    pub escrow: Account<'info, Escrow>,
+    pub escrow: Box<Account<'info, Escrow>>,
 
     #[account(
         mut,
